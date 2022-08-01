@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    // throw new Error("invalid user data");
+    throw new Error("invalid user data");
   }
 });
 // @desc Login a new user
@@ -69,7 +69,13 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route api/users/me
 // @access Private
 const getMe = asyncHandler(async (req, res) => {
-  res.send("me");
+  //req.user comes from authMiddleware
+  const user = {
+    id: req.user._id,
+    email: req.user.email,
+    name: req.user.name,
+  };
+  res.status(200).json(user);
 });
 
 //generate token
