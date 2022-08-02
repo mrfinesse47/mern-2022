@@ -14,6 +14,11 @@ const Header = () => {
             <FaSignInAlt /> Login
           </Link>
         </li>
+        <li>
+          <Link to="/register">
+            <FaUser /> Register
+          </Link>
+        </li>
       </ul>
     </header>
   );
