@@ -14,6 +14,10 @@ const initialState = {
 };
 
 // Register new user
+
+//is the first argument just for the redux tools??
+// i changed it to auth/registeaaaa or some garbage and it worked,
+// just had different name
 export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
@@ -37,6 +41,12 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   console.log(user);
 });
 
+//Logout user
+
+// export const logout = createAsyncThunk("auth/logout", async () => {
+//   await authService.logout();
+// });
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -46,6 +56,11 @@ export const authSlice = createSlice({
       state.isError = false;
       state.isSuccess = false;
       state.message = "";
+    },
+    //i decided to write without async logic
+    logout: (state) => {
+      authService.logout();
+      state.user = null;
     },
   },
   //the extra reducers are for your pending accepted rejected states as seen in the
@@ -67,9 +82,10 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       });
+    // for some reason the tutorial used an async function to log out
   },
 });
 
-export const { reset } = authSlice.actions;
+export const { reset, logout } = authSlice.actions;
 //any action created in the authslice you must not forget to export
 export default authSlice.reducer;
