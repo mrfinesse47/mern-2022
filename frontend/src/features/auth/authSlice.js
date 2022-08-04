@@ -1,8 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
+//get user from local storage
+const user = JSON.parse(localStorage.getItem("user"));
+//token is in there as well check redux dev tools to see
+
 const initialState = {
-  user: null,
+  user: user || null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -23,7 +27,7 @@ export const register = createAsyncThunk(
       //     error.message ||
       //     error.toString();
 
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
