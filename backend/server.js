@@ -25,5 +25,7 @@ app.get("/", (req, res) => {
 //routes, the require returns a router
 app.use("/api/users", require("./routes/userRoutes"));
 
+app.use("/api/tickets", require("./routes/ticketRoutes"));
+
 //http://expressjs.com/en/guide/error-handling.html -- explains error handling
 app.use(errorHandler);
