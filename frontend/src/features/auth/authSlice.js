@@ -13,7 +13,6 @@ const initialState = {
 export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
-    console.log(user);
     try {
       return await authService.register(user);
     } catch (error) {
@@ -37,7 +36,14 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = "";
+    },
+  },
   //the extra reducers are for your pending accepted rejected states as seen in the
   //redux developer tools in the browser
 
@@ -60,4 +66,6 @@ export const authSlice = createSlice({
   },
 });
 
+export const { reset } = authSlice.actions;
+//any action created in the authslice you must not forget to export
 export default authSlice.reducer;
