@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { register, reset } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -30,9 +31,6 @@ const Register = () => {
     }
     //redirect  when logged in
     if (isSuccess || user) {
-      if (user) {
-        console.log("already logged in");
-      }
       navigate("/");
     }
     dispatch(reset());
@@ -56,6 +54,10 @@ const Register = () => {
       //pass the slice into the dispatch
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
