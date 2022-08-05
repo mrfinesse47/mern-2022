@@ -8,6 +8,7 @@ const Ticket = require("../models/ticketModel");
 // @access  Private
 const getTickets = asyncHandler(async (req, res) => {
   // Get user using the id in the JWT
+  // the req.user.id comes from middleware
   const user = await User.findById(req.user.id);
 
   if (!user) {
