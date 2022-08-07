@@ -1,11 +1,11 @@
-const express = require("express");
-const colors = require("colors");
-const dotenv = require("dotenv").config();
+const express = require('express');
+const colors = require('colors');
+const dotenv = require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const errorHandler = require("./middleware/errorMiddleware");
-const connectDB = require("./config/db");
+const errorHandler = require('./middleware/errorMiddleware');
+const connectDB = require('./config/db');
 
 console.log(process.env.PORT);
 
@@ -18,14 +18,14 @@ app.listen(PORT, () => {
   console.log(`Server running on port:${PORT}`);
 });
 
-app.get("/", (req, res) => {
-  res.status(201).json({ message: "welcome to the support desk API" });
+app.get('/', (req, res) => {
+  res.status(201).json({ message: 'welcome to the support desk API' });
 });
 
 //routes, the require returns a router
-app.use("/api/users", require("./routes/userRoutes"));
+app.use('/api/users', require('./routes/userRoutes'));
 
-app.use("/api/tickets", require("./routes/ticketRoutes"));
+app.use('/api/tickets', require('./routes/ticketRoutes'));
 
 //http://expressjs.com/en/guide/error-handling.html -- explains error handling
 app.use(errorHandler);
