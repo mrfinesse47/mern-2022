@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import authService from "./authService";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import authService from './authService';
 
 //get user from local storage
-const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem('user'));
 //token is in there as well check redux dev tools to see
 
 const initialState = {
@@ -10,12 +10,12 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: "",
+  message: '',
 };
 
 // login new user
 
-export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     return await authService.login(user); //this return shows up as the action.payload
   } catch (error) {
@@ -25,11 +25,8 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 
 // Register new user
 
-//is the first argument just for the redux tools??
-// i changed it to auth/registeaaaa or some garbage and it worked,
-// just had different name
 export const register = createAsyncThunk(
-  "auth/register",
+  'auth/register',
   async (user, thunkAPI) => {
     try {
       return await authService.register(user);
@@ -53,14 +50,14 @@ export const register = createAsyncThunk(
 // });
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     reset: (state) => {
       state.isLoading = false;
       state.isError = false;
       state.isSuccess = false;
-      state.message = "";
+      state.message = '';
     },
     //i decided to write without async logic
     logout: (state) => {
