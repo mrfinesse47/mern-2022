@@ -22,7 +22,6 @@ const noteSchema = mongoose.Schema(
     },
     StaffId: {
       type: String,
-      required: [true, 'Please add a staff ID'],
     },
   },
   {
