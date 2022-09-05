@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getTicket, closeTicket } from '../features/tickets/ticketSlice';
+import { getNotes, reset as notesReset } from '../features/notes/noteSlice';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import { toast } from 'react-toastify';
@@ -9,6 +10,10 @@ import { toast } from 'react-toastify';
 const Ticket = () => {
   const { isError, message, isLoading, ticket } = useSelector(
     (state) => state.ticket
+  );
+
+  const { notes, isLoading: notesIsLoading } = useSelector(
+    (state) => state.note
   );
 
   const dispatch = useDispatch();
@@ -19,6 +24,7 @@ const Ticket = () => {
       toast.error(message);
     }
     dispatch(getTicket(ticketId));
+    dispatch(getNotes(ticketId));
   }, [isError, message, ticketId, dispatch]);
 
   const onTicketClose = () => {
